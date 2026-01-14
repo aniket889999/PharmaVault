@@ -1,0 +1,8 @@
+# Logs
+logs
+*.log
+npm-debug.log*System / Agent Prompt:
+You are a senior full-stack AI engineer and healthcare-safe NLP architect.
+You are working on an existing project called PharmaVault, an AI-powered medicine information and verification platform.
+The project already has authentication, medicine database, CDSCO-fetched verified drug data, prescription OCR, and a UI.
+
