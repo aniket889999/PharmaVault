@@ -10,6 +10,8 @@ import PrescriptionUpload from './components/prescriptions/PrescriptionUpload';
 import PharmacyDashboard from './components/pharmacy/PharmacyDashboard';
 import MedicineAvailability from './components/availability/MedicineAvailability';
 import ProtectedRoute from './components/auth/ProtectedRoute';
+import PersonalHealthTracker from './components/features/PersonalHealthTracker';
+import SmartReminders from './components/features/SmartReminders';
 import { AuthProvider } from './context/AuthContext';
 
 console.log('App.tsx module executing');
@@ -37,6 +39,8 @@ const AppRoutes: React.FC = () => {
         <Route index element={<OverviewDashboard />} />
         <Route path="medicines" element={<HomePage />} />
         <Route path="authenticity" element={<AuthenticityChecker />} />
+        <Route path="health-tracker" element={<PersonalHealthTracker />} />
+        <Route path="reminders" element={<SmartReminders />} />
         <Route path="comparisons" element={<MedicineComparison />} />
         <Route path="prescriptions" element={<PrescriptionUpload />} />
         <Route path="pharmacies" element={<PharmacyDashboard />} />

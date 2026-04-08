@@ -12,7 +12,9 @@ import {
   Menu,
   X,
   Bell,
-  Search
+  Search,
+  Activity,
+  CalendarDays
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -26,6 +28,8 @@ const DashboardLayout: React.FC = () => {
     { name: 'Medicines', href: '/dashboard/medicines', icon: Pill, current: location.pathname === '/dashboard/medicines' },
     { name: 'Availability', href: '/dashboard/availability', icon: Search, current: location.pathname === '/dashboard/availability' },
     { name: 'Authenticity', href: '/dashboard/authenticity', icon: Shield, current: location.pathname === '/dashboard/authenticity' },
+    { name: 'Health Tracker', href: '/dashboard/health-tracker', icon: Activity, current: location.pathname === '/dashboard/health-tracker' },
+    { name: 'Reminders', href: '/dashboard/reminders', icon: CalendarDays, current: location.pathname === '/dashboard/reminders' },
     { name: 'Comparisons', href: '/dashboard/comparisons', icon: GitCompare, current: location.pathname === '/dashboard/comparisons' },
     { name: 'Prescriptions', href: '/dashboard/prescriptions', icon: FileText, current: location.pathname === '/dashboard/prescriptions' },
     { name: 'Pharmacies', href: '/dashboard/pharmacies', icon: Store, current: location.pathname === '/dashboard/pharmacies' },

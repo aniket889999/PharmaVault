@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Search, AlertTriangle, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Shield, Search, AlertTriangle, CheckCircle, XCircle, Clock, QrCode, Camera, X } from 'lucide-react';
 import { AuthenticityService } from '../../services/authenticityService';
 import { AuthenticityCheck } from '../../types';
 import LoadingSpinner from '../ui/LoadingSpinner';
@@ -14,8 +14,25 @@ const AuthenticityChecker: React.FC = () => {
   const [result, setResult] = useState<AuthenticityCheck | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showScanner, setShowScanner] = useState(false);
+  const [isScanning, setIsScanning] = useState(false);
 
   const authenticityService = AuthenticityService.getInstance();
+
+  const simulateScan = () => {
+    setIsScanning(true);
+    // Simulate API/camera parsing delay
+    setTimeout(() => {
+      setFormData({
+        medicineId: 'med-005',
+        batchNumber: 'PFE202489',
+        manufacturingDate: '2024-01-15',
+        expiryDate: '2025-01-15'
+      });
+      setIsScanning(false);
+      setShowScanner(false);
+    }, 1500);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,6 +95,16 @@ const AuthenticityChecker: React.FC = () => {
         <p className="text-gray-600">
           Verify the authenticity of medicines using CDSCO and FDA databases
         </p>
+      </div>
+
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={() => setShowScanner(true)}
+          className="flex items-center px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium hover:bg-indigo-100 transition-colors border border-indigo-200 shadow-sm"
+        >
+          <QrCode className="h-5 w-5 mr-2" />
+          Scan QR / Barcode
+        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -294,6 +321,62 @@ const AuthenticityChecker: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Scanner Modal */}
+      {showScanner && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-sm w-full overflow-hidden">
+            <div className="bg-gray-900 px-4 py-3 border-b border-gray-800 flex justify-between items-center">
+              <h3 className="text-white font-medium flex items-center">
+                <Camera className="h-4 w-4 mr-2" />
+                Scan Medicine
+              </h3>
+              <button 
+                onClick={() => !isScanning && setShowScanner(false)}
+                className="text-gray-400 hover:text-white"
+                disabled={isScanning}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 text-center">
+              <div className="relative w-48 h-48 mx-auto mb-4 border-2 border-indigo-500 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                {isScanning ? (
+                  <div className="absolute inset-0 bg-indigo-500 opacity-20 animate-pulse"></div>
+                ) : (
+                  <QrCode className="h-16 w-16 text-gray-400" />
+                )}
+                
+                {/* Scanning line animation */}
+                {isScanning && (
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-indigo-500 shadow-[0_0_8px_2px_rgba(99,102,241,0.6)] animate-[scan_1.5s_ease-in-out_infinite]"></div>
+                )}
+              </div>
+              
+              <p className="text-gray-600 mb-6 font-medium h-6">
+                {isScanning ? 'Extracting product ID...' : 'Position QR/Barcode within frame'}
+              </p>
+              
+              <button
+                onClick={simulateScan}
+                disabled={isScanning}
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg font-medium transition-colors disabled:bg-indigo-400"
+              >
+                {isScanning ? 'Processing...' : 'Simulate Scan Capture'}
+              </button>
+            </div>
+          </div>
+          
+          <style>{`
+            @keyframes scan {
+              0% { top: 0; }
+              50% { top: 100%; }
+              100% { top: 0; }
+            }
+          `}</style>
+        </div>
+      )}
     </div>
   );
 };

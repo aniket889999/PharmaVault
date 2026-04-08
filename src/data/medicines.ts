@@ -1,6 +1,6 @@
 import { Medicine } from '../types';
 
-export const medicines: Medicine[] = [
+export const medicines = [
   {
     id: 'med-001',
     name: 'Paracetamol',
@@ -132,8 +132,158 @@ export const medicines: Medicine[] = [
     price: 399.99,
     inStock: true,
     imageUrl: 'https://images.pexels.com/photos/3683101/pexels-photo-3683101.jpeg'
+  },
+  {
+    id: 'med-006',
+    name: 'Azithromycin',
+    manufacturer: 'ZithroCare',
+    category: 'Antibiotic',
+    description: 'A macrolide antibiotic used to treat various bacterial infections.',
+    dosage: 'Adults: 500mg daily for 3 days or 500mg day 1, then 250mg days 2-5.',
+    sideEffects: ['Nausea', 'Vomiting', 'Diarrhea', 'Abdominal pain'],
+    usedFor: ['Respiratory infections', 'Skin infections', 'Ear infections'],
+    alternatives: ['Clarithromycin', 'Erythromycin', 'Amoxicillin'],
+    expiryDate: '2025-02-14',
+    price: 245.00,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg'
+  },
+  {
+    id: 'med-007',
+    name: 'Pantoprazole',
+    manufacturer: 'GastroMed',
+    category: 'Gastrointestinal',
+    description: 'Proton pump inhibitor used to decrease stomach acid.',
+    dosage: 'Adults: 40mg once daily before a meal.',
+    sideEffects: ['Headache', 'Diarrhea', 'Stomach pain', 'Gas'],
+    usedFor: ['GERD', 'Stomach ulcers', 'Acid reflux'],
+    alternatives: ['Omeprazole', 'Esomeprazole', 'Lansoprazole'],
+    expiryDate: '2025-06-20',
+    price: 130.50,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/139398/thermometer-headache-pain-pills-139398.jpeg'
+  },
+  {
+    id: 'med-008',
+    name: 'Levothyroxine',
+    manufacturer: 'EndoHealth',
+    category: 'Hormone',
+    description: 'Synthetic thyroid hormone used to treat hypothyroidism.',
+    dosage: 'Adults: 50-100mcg once daily on an empty stomach.',
+    sideEffects: ['Weight loss', 'Tremors', 'Headache', 'Insomnia'],
+    usedFor: ['Hypothyroidism', 'Thyroid cancer', 'Goiter'],
+    alternatives: ['Liothyronine', 'Armour Thyroid', 'Nature-Throid'],
+    expiryDate: '2025-11-01',
+    price: 85.00,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/3683101/pexels-photo-3683101.jpeg'
+  },
+  {
+    id: 'med-009',
+    name: 'Cetirizine',
+    manufacturer: 'AllergyFree Labs',
+    category: 'Antihistamine',
+    description: 'Antihistamine used to relieve allergy symptoms.',
+    dosage: 'Adults: 10mg once daily.',
+    sideEffects: ['Drowsiness', 'Dry mouth', 'Fatigue', 'Dizziness'],
+    usedFor: ['Hay fever', 'Allergies', 'Hives'],
+    alternatives: ['Loratadine', 'Fexofenadine', 'Levocetirizine'],
+    expiryDate: '2024-09-15',
+    price: 45.99,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg'
+  },
+  {
+    id: 'med-010',
+    name: 'Amlodipine',
+    manufacturer: 'Heart Health Inc.',
+    category: 'Blood Pressure',
+    description: 'A calcium channel blocker used to treat high blood pressure.',
+    dosage: 'Adults: 5-10mg once daily.',
+    sideEffects: ['Swelling in legs', 'Fatigue', 'Palpitations', 'Nausea'],
+    usedFor: ['Hypertension', 'Chest pain (angina)'],
+    alternatives: ['Nifedipine', 'Diltiazem', 'Verapamil'],
+    expiryDate: '2024-12-05',
+    price: 110.00,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/4021808/pexels-photo-4021808.jpeg'
+  },
+  {
+    id: 'med-011',
+    name: 'Losartan',
+    manufacturer: 'VascCare',
+    category: 'Blood Pressure',
+    description: 'An ARB medication used to treat high blood pressure.',
+    dosage: 'Adults: 50mg once daily, can be increased to 100mg.',
+    sideEffects: ['Dizzy feeling', 'Back pain', 'Cold symptoms', 'Tiredness'],
+    usedFor: ['Hypertension', 'Kidney protection in diabetes'],
+    alternatives: ['Valsartan', 'Irbesartan', 'Olmesartan'],
+    expiryDate: '2025-03-10',
+    price: 145.25,
+    inStock: false,
+    imageUrl: 'https://images.pexels.com/photos/159211/headache-pain-pills-medication-159211.jpeg'
+  },
+  {
+    id: 'med-012',
+    name: 'Albuterol',
+    manufacturer: 'BreatheEasy',
+    category: 'Respiratory',
+    description: 'A bronchodilator that relaxes muscles in the airways.',
+    dosage: 'Adults: 1-2 puffs every 4-6 hours as needed.',
+    sideEffects: ['Nervousness', 'Shaking', 'Headache', 'Heart palpitations'],
+    usedFor: ['Asthma attacks', 'COPD', 'Exercise-induced bronchospasm'],
+    alternatives: ['Levalbuterol', 'Salmeterol', 'Formoterol'],
+    expiryDate: '2025-08-30',
+    price: 350.00,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/3683098/pexels-photo-3683098.jpeg'
+  },
+  {
+    id: 'med-013',
+    name: 'Omeprazole',
+    manufacturer: 'GastroMed',
+    category: 'Gastrointestinal',
+    description: 'Treats symptoms of gastroesophageal reflux disease (GERD).',
+    dosage: 'Adults: 20mg once daily before eating.',
+    sideEffects: ['Headache', 'Stomach pain', 'Nausea', 'Diarrhea'],
+    usedFor: ['GERD', 'Heartburn', 'Zollinger-Ellison syndrome'],
+    alternatives: ['Pantoprazole', 'Lansoprazole', 'Rabeprazole'],
+    expiryDate: '2024-10-10',
+    price: 120.75,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/139398/thermometer-headache-pain-pills-139398.jpeg'
+  },
+  {
+    id: 'med-014',
+    name: 'Gabapentin',
+    manufacturer: 'NeuroPharma',
+    category: 'Neuropathic Pain',
+    description: 'Anti-epileptic medication also used for nerve pain.',
+    dosage: 'Adults: 300mg day 1, 300mg twice day 2, 300mg three times day 3.',
+    sideEffects: ['Dizziness', 'Drowsiness', 'Weight gain', 'Fatigue'],
+    usedFor: ['Nerve pain', 'Seizures', 'Restless legs syndrome'],
+    alternatives: ['Pregabalin', 'Amitriptyline', 'Duloxetine'],
+    expiryDate: '2025-05-15',
+    price: 215.00,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/4021808/pexels-photo-4021808.jpeg'
+  },
+  {
+    id: 'med-015',
+    name: 'Sertraline',
+    manufacturer: 'MindWellness',
+    category: 'Mental Health',
+    description: 'SSRI antidepressant used to treat a variety of mental health conditions.',
+    dosage: 'Adults: 50mg once daily.',
+    sideEffects: ['Nausea', 'Insomnia', 'Diarrhea', 'Dry mouth'],
+    usedFor: ['Depression', 'OCD', 'Panic attacks', 'PTSD'],
+    alternatives: ['Fluoxetine', 'Escitalopram', 'Citalopram'],
+    expiryDate: '2025-07-22',
+    price: 180.50,
+    inStock: true,
+    imageUrl: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg'
   }
-];
+] as Medicine[];
 
 export const getMedicineById = (id: string): Medicine | undefined => {
   return medicines.find(med => med.id === id);

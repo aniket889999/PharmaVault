@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ChevronRight, Search, AlertCircle, Stethoscope } from 'lucide-react';
+import { Send, ChevronRight, Search, AlertCircle, Stethoscope, Mic, MicOff } from 'lucide-react';
 import { useChatStore } from '../../stores/chatStore';
 import { questionTemplates } from '../../data/questions';
 import { QuestionType } from '../../types';
@@ -9,6 +9,7 @@ import LoadingSpinner from '../ui/LoadingSpinner';
 const ChatInterface: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [chatMode, setChatMode] = useState<'medicine' | 'general'>('medicine');
+  const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   
@@ -50,6 +51,46 @@ const ChatInterface: React.FC = () => {
       e.preventDefault();
       handleSubmit(e);
     }
+  };
+  
+  const toggleRecording = () => {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      alert('Speech recognition is not supported in your browser.');
+      return;
+    }
+    
+    if (isRecording) {
+      // In a real implementation we would keep a ref to recognition and stop it.
+      // Simply setting state works for brief toggle in demo
+      setIsRecording(false);
+      return;
+    }
+    
+    // @ts-ignore
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    
+    recognition.onstart = () => setIsRecording(true);
+    
+    recognition.onresult = (event: any) => {
+      const transcript = Array.from(event.results)
+        .map((result: any) => result[0])
+        .map((result: any) => result.transcript)
+        .join('');
+      setInputValue(transcript);
+    };
+    
+    recognition.onerror = (event: any) => {
+      console.error('Speech recognition error', event.error);
+      setIsRecording(false);
+    };
+    
+    recognition.onend = () => setIsRecording(false);
+    
+    recognition.start();
   };
   
   const handleQuestionClick = (questionType: QuestionType) => {
@@ -208,19 +249,32 @@ const ChatInterface: React.FC = () => {
                   ? "Ask about symptoms, health concerns, or general medical questions..."
                   : `Ask about ${selectedMedicine?.name || 'this medicine'}...`
               }
-              className="block w-full pl-4 pr-12 py-3 text-base rounded-lg border-0 ring-1 ring-inset ring-gray-300
+              className="block w-full pl-4 pr-24 py-3 text-base rounded-lg border-0 ring-1 ring-inset ring-gray-300
                 focus:ring-2 focus:ring-primary-500 resize-none placeholder:text-gray-400"
               rows={1}
             />
-            <button
-              type="submit"
-              disabled={!inputValue.trim() || isLoading}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full
-                text-primary-600 hover:text-primary-800 hover:bg-primary-50 disabled:text-gray-400
-                disabled:hover:bg-transparent transition-colors"
-            >
-              <Send size={20} />
-            </button>
+            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-1">
+              <button
+                type="button"
+                onClick={toggleRecording}
+                className={`p-2 rounded-full transition-colors ${
+                  isRecording 
+                    ? 'text-red-600 bg-red-50 hover:bg-red-100 animate-pulse' 
+                    : 'text-gray-400 hover:text-primary-600 hover:bg-primary-50'
+                }`}
+                title={isRecording ? "Stop recording" : "Start voice search"}
+              >
+                {isRecording ? <MicOff size={20} /> : <Mic size={20} />}
+              </button>
+              <button
+                type="submit"
+                disabled={!inputValue.trim() || isLoading}
+                className="p-2 rounded-full text-primary-600 hover:text-primary-800 hover:bg-primary-50 
+                  disabled:text-gray-400 disabled:hover:bg-transparent transition-colors"
+              >
+                <Send size={20} />
+              </button>
+            </div>
           </div>
           <p className="mt-3 text-xs text-center text-gray-500">
             {chatMode === 'general' 
